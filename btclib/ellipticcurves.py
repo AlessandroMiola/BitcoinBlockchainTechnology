@@ -198,7 +198,8 @@ def int_from_Scalar(ec: EllipticCurve, n: Scalar) -> int:
         n = bytes.fromhex(n)
 
     if isinstance(n, bytes) or isinstance(n, bytearray):
-        assert len(n) == ec.bytesize, "wrong lenght"
+        assert len(n) == ec.bytesize or len(n) == ec.bytesize+1 \
+            or len(n) == 2*ec.bytesize+1, "wrong lenght"
         n = int.from_bytes(n, 'big')
 
     if not isinstance(n, int):
